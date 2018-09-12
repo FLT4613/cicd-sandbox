@@ -1,7 +1,13 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "alpine/alpine64"
   config.vm.box_version = "3.6.0"
-
+  config.vm.provision "shell", inline: <<-SCRIPT
+  apk update
+  apk upgrade
+  apk add docker py-pip
+  pip install docker-compose
+  service docker start
+  SCRIPT
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false
     vb.memory = "512"
