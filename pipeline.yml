@@ -16,6 +16,8 @@ jobs:
         type: docker-image
         source:
           repository: alpine
+      inputs:
+        - name: gitlab-source
       run:
-        path: echo
-        args: [Hello, world]
+        path: cat
+        args: [gitlab-source/README.md]
