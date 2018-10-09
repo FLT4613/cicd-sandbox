@@ -1,12 +1,21 @@
+resources:
+- name: gitlab-source
+  type: git
+  source:
+    uri: http://192.168.0.202/a/hige.git
+
 jobs:
-- name: hello-world
+- name: build
   plan:
-  - task: say-hello
+  - get: gitlab-source
+    trigger: true
+  - task: hello
     config:
       platform: linux
       image_resource:
         type: docker-image
-        source: {repository: alpine}
+        source:
+          repository: alpine
       run:
         path: echo
         args: [Hello, world]
