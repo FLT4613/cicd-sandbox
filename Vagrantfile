@@ -9,6 +9,9 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define :concourse do | concourse |
+    concourse.vm.provider "virtualbox" do |vm|
+      vm.memory = 2048
+    end
     concourse.vm.hostname = "concourse"
     concourse.vm.network :public_network, ip: "192.168.0.200", bridge: "en1: Wi-Fi (AirPort)"
     concourse.vm.provision "shell", inline: <<-SCRIPT
@@ -22,6 +25,9 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define :datasource do | datasource |
+    datasource.vm.provider "virtualbox" do |vm|
+      vm.memory = 2048
+    end
     datasource.vm.hostname = "datasource"
     datasource.vm.network :public_network, ip: "192.168.0.202", bridge: "en1: Wi-Fi (AirPort)"
     datasource.vm.provision "shell", inline: <<-SCRIPT
